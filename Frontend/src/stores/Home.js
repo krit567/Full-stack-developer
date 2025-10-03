@@ -1,16 +1,22 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import axios from 'axios'
-export const useHomeStore = defineStore('home', {
-  state : () => ({
-    message : ref('Hello welcome to my Home Page')
+import { defineStore } from "pinia";
+import axios from "axios";
+export const useHomeStore = defineStore("home", {
+  state: () => ({
+    message: "Hello welcome to my Home Page",
+    description: "This is a description",
+    loading: false,
+    error: null,
+    Name: null,
   }),
-  getters : {
-   krit(state) {
-    return `${state.message} my name is krit`
-   }
+  getters: {
+    krit(state) {
+      return `${state.message} my name is krit`;
+    },
   },
-  actions : {
-
-  }
-})
+  actions: {
+    setName(newName) {
+      this.message = this.message + newName;
+      return  `${this.message}`
+    },
+  },
+});

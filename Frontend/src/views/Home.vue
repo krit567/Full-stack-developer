@@ -1,13 +1,27 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useHomeStore } from '@/stores/Home';
-
+const krit = ref('krit');
 const home = useHomeStore();
+const Name = window.prompt("enter your name : ")
+home.setName(Name)
+const name = ref(Name);
+onMounted(() => {
+
+});
 
 </script>
 
 <template>
-{{ home.krit }}
+    <div class="flex">
+        <h1>
+            Krit
+        </h1>
+        <h3>
+            {{ home.krit }}
+        </h3>
+    </div>
 <h1>Hello welcome to my Home Page</h1>
-
+{{`Message` + home.message }}
+{{ name }}
 </template>

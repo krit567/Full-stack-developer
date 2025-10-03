@@ -7,4 +7,6 @@ The path to full stack developer
 -- learn pinia
 
 # Day 1
-
+--การใช้ Dom js และ Dom vue
+--state,actions 
+-- 
