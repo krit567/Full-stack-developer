@@ -15,3 +15,9 @@ The path to full stack developer
 --learn use route
 -- edit type in package.json is module
 -- path api
+
+# Day 3
+-- learn socket.io 
+-- learn node.js and express beginner
+-- learn socket.io
+-- start project Chatapp
