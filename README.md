@@ -21,3 +21,8 @@ The path to full stack developer
 -- learn node.js and express beginner
 -- learn socket.io
 -- start project Chatapp
+
+# Day4
+-- learn io.on and io.emit
+-- chat app 50%
+-- @v-on and v-modle

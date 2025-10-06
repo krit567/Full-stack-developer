@@ -2,6 +2,7 @@
 const express = require('express');
 const http = require('http');
 const app = express();
+const { join } = require('node:path');
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server,{
@@ -15,7 +16,7 @@ const {readdirSync} = require('fs')
 
 
 app.get('/',(req, res) => {
-    res.sendFile(__dirname + '/Frontend/index.html')
+    res.sendFile(join(__dirname, '/Frontend/index.html'))
 })
 
 // const io = require('socket.io',(server, {
