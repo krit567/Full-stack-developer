@@ -26,3 +26,7 @@ The path to full stack developer
 -- learn io.on and io.emit
 -- chat app 50%
 -- @v-on and v-modle
+
+# Day 5
+-- learn beginner crud
+-- learn socket.io 

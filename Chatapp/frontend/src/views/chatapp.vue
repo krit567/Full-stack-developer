@@ -34,11 +34,12 @@ const sendMessage = () => {
     input.value = '';
   }
 }
+
 </script>
 
 <template>
   <ul id="messages">
-    <div>{{  }}</div>
+    <div class="center">Message</div>
     <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
   </ul>
   <form id="form" @submit.prevent="sendMessage">
@@ -58,4 +59,12 @@ const sendMessage = () => {
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px; /* หรือกำหนดความสูงตามที่ต้องการ */
+        text-align: center;
+      }
     </style>
