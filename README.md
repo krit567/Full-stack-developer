@@ -30,3 +30,7 @@ The path to full stack developer
 # Day 5
 -- learn beginner crud
 -- learn socket.io 
+
+# Day 6
+-- learn edit value
+-- create chat.js

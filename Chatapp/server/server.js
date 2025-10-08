@@ -17,22 +17,23 @@ app.get('/chat', (req, res) => {
   res.sendFile(join(__dirname, '../frontend/index.html')); 
 });
 
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
-  console.log('Total connected users:', io.sockets.sockets.size);
-  console.log("****************************************")
-  socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
-    // // ส่งข้อความไปยัง client ทุกคน (รวมตัวเอง)
-    io.emit('chat message', msg);
-      console.log('Total connected users:', io.sockets.sockets.size);
-  });
+require('./socket/chat')(io);
+// io.on('connection', (socket) => {
+//   console.log('User connected:', socket.id);
+//   console.log('Total connected users:', io.sockets.sockets.size);
+//   console.log("****************************************")
+//   socket.on('chat message', (msg) => {
+//     console.log('message: ' + msg);
+//     // // ส่งข้อความไปยัง client ทุกคน (รวมตัวเอง)
+//     io.emit('chat message', msg);
+//       console.log('Total connected users:', io.sockets.sockets.size);
+//   });
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-    console.log('Total connected users:', io.sockets.sockets.size);
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log('User disconnected:', socket.id);
+//     console.log('Total connected users:', io.sockets.sockets.size);
+//   });
+// });
 
 server.listen(5000,() =>{
     console.log('Server running on port 5000')

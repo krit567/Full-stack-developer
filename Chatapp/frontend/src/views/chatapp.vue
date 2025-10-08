@@ -1,15 +1,16 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import { onMounted } from 'vue';
 import { io } from 'socket.io-client';
-const messages = ref([])
-const input = ref('')
-let socket
+import { timestamp } from '@vueuse/core';
+const username = ref('');
+const messages = ref([]);
+const input = ref('');
+let socket;
 
-onMounted(() => {
+onMounted(async () => {
     socket = io('http://localhost:5000')
-
     socket.on('connect', () => {
       console.log('Connected to server:', socket.id)
     })
@@ -18,15 +19,18 @@ onMounted(() => {
       console.log('Disconnected from server')
     })
 
-    socket.on('chat message',(msg) =>{
-      messages.value.push(msg)
-      console.log('Received message:', msg)
+    socket.on('chat message', (msg) => {
+      messages.value.push(msg);
+      console.log('Received message:', msg);
     })
 })
 
-
 const sendMessage = () => {
-  const inputT = input.value.trim()
+  const inputT = {
+    username: username.value || 'Anonymous',
+    input: input.value.trim(),
+    timestamp: new Date().toLocaleTimeString()
+  };
   if(inputT) {
     socket.emit('chat message',inputT);
     console.log('input.value',input.value);
@@ -35,12 +39,23 @@ const sendMessage = () => {
   }
 }
 
+onUnmounted(() => {
+  socket.disconnect();
+})
+
+const login = () => {
+  if (username.value.trim()){
+    isLogin.value = true
+    socket.emit('checkuser',username.value);
+  }
+}
 </script>
 
 <template>
   <ul id="messages">
     <div class="center">Message</div>
-    <li v-for="(message, index) in messages" :key="index">{{ message }}</li>
+    <li v-for="(message, index) in messages" :key="index">{{ message.username }} {{ message.message }} {{ message.timestamp }}</li>
+
   </ul>
   <form id="form" @submit.prevent="sendMessage">
     <input type="text" v-model="input" autocomplete="off" />
