@@ -34,3 +34,14 @@ The path to full stack developer
 # Day 6
 -- learn edit value
 -- create chat.js
+
+# Day 7 
+-- clean code
+-- add comment
+
+# Day 8
+-- rest body
+
+# Day 9
+-- learn code socket.io from project Chatapp
+-- add alert username join

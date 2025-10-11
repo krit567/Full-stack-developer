@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const { join } = require('node:path');
 const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
@@ -12,10 +11,6 @@ const io = new Server(server,{
 // app.get('/', (req,res) => {
 //     res.send('<h1>hello test</h1>')
 // })
-
-app.get('/chat', (req, res) => { 
-  res.sendFile(join(__dirname, '../frontend/index.html')); 
-});
 
 require('./socket/chat')(io);
 // io.on('connection', (socket) => {

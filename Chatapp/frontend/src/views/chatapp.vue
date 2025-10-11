@@ -13,16 +13,24 @@ onMounted(async () => {
     socket = io('http://localhost:5000')
     socket.on('connect', () => {
       console.log('Connected to server:', socket.id)
-    })
+    });
 
     socket.on('disconnect', () => {
       console.log('Disconnected from server')
-    })
+    });
 
     socket.on('chat message', (msg) => {
       messages.value.push(msg);
       console.log('Received message:', msg);
-    })
+    });
+
+    socket.on('join',(username) => {
+      messages.value.push({
+        username: username,
+        message: `${username} joined the chat`,
+        timestamp:new Date().toLocaleTimeString()
+      });
+    });
 })
 
 const sendMessage = () => {
@@ -42,25 +50,38 @@ const sendMessage = () => {
 onUnmounted(() => {
   socket.disconnect();
 })
-
+const isLogin = ref(false); 
 const login = () => {
   if (username.value.trim()){
-    isLogin.value = true
+    isLogin.value = true;
     socket.emit('checkuser',username.value);
   }
 }
 </script>
 
 <template>
-  <ul id="messages">
-    <div class="center">Message</div>
-    <li v-for="(message, index) in messages" :key="index">{{ message.username }} {{ message.message }} {{ message.timestamp }}</li>
+  <div>
 
-  </ul>
-  <form id="form" @submit.prevent="sendMessage">
-    <input type="text" v-model="input" autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
+    <div v-if="!isLogin">
+      <h2>Enter your name to join the chat</h2>
+      <input v-model="username" placeholder="Enter your name" />
+      <button @click="login">Join Chat</button>
+    </div>
+    <div v-else>
+      <h2>Welcome, {{ username }}</h2>
+      <ul>
+        <li v-for="(message, index) in messages" :key="index">
+          <strong>{{ message.username }}</strong>
+           <strong>{{ message.message }}</strong>
+        </li>
+      </ul>
+
+      <form id="form" @submit.prevent="sendMessage">
+        <input type="text" v-model="input" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+</div>
 </template>
 
  <style>
