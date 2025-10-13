@@ -45,3 +45,11 @@ The path to full stack developer
 # Day 9
 -- learn code socket.io from project Chatapp
 -- add alert username join
+
+# Day 10 
+-- install mongodb on linux ubuntu
+
+# Day 11
+--  edit error 
+-- Prepare to create backend rest api 
+-- File access rights, or permissions,

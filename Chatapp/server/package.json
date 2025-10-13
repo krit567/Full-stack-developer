@@ -11,7 +11,11 @@
     "start": "nodemon server"
   },
   "dependencies": {
+    "@vueuse/core": "^13.9.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
+    "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
     "server": "^1.0.42",
     "socket.io": "^4.8.1"
