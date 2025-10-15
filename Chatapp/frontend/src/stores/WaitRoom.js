@@ -1,0 +1,21 @@
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
+import axios from 'axios'
+const URL = "http://localhost:5000";
+export const useWaitRoomStore = defineStore('WaitRoom',{
+  state: () => ({
+    Pin : ref(''),
+    User : ref('')
+  }),
+  actions:{
+    async createRoom(){
+      try {
+      const res = await axios.get(`${URL}/api/pin`)
+      this.Pin = res.data
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
+  }
+})

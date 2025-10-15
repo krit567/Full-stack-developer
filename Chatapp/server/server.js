@@ -1,18 +1,33 @@
 const express = require('express')
 const app = express()
+const  { readdirSync } = require('fs')
 const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
+const morgen = require('morgan')
+const cors = require('cors')
+const bodyparser = require('body-parser')
+const io = new Server(server)
+const socket = require('./socket/chat')(io)
 
-const io = new Server(server,{
-    cors: {origin: ['http://localhost:5173']}
-})
-
+app.use(cors())
+app.use(morgen('dev'))
+app.use(bodyparser.text())
 // app.get('/', (req,res) => {
 //     res.send('<h1>hello test</h1>')
 // })
+readdirSync('./Routes')
+    .map((r) =>  
+        app.use('/api', require('./Routes/' + r))
+    )
+
+// readdirSync('./Routes').map((r) => {
+//     console.log(`Loading route: ${r}`); // เพิ่ม log เพื่อตรวจสอบ
+//     app.use('/api', require('./Routes/' + r));
+// });
 
 require('./socket/chat')(io);
+
 // io.on('connection', (socket) => {
 //   console.log('User connected:', socket.id);
 //   console.log('Total connected users:', io.sockets.sockets.size);

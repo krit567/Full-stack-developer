@@ -52,4 +52,12 @@ The path to full stack developer
 # Day 11
 --  edit error 
 -- Prepare to create backend rest api 
--- File access rights, or permissions,
+-- File access rights, or permissions
+
+# Day 12
+-- learn Routes Backend 
+
+# Day 13
+-- learn random number in backend
+-- create stores WaitRoom
+-- complete RandomNumber on test
