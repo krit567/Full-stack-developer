@@ -15,10 +15,6 @@ onMounted(async () => {
       console.log('Connected to server:', socket.id)
     });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from server')
-    });
-
     socket.on('chat message', (msg) => {
       messages.value.push(msg);
       console.log('Received message:', msg);
@@ -27,7 +23,7 @@ onMounted(async () => {
     socket.on('join',(username) => {
       messages.value.push({
         username: username,
-        message: `${username} joined the chat`,
+        message: ` joined the chat`,
         timestamp:new Date().toLocaleTimeString()
       });
     });
@@ -36,10 +32,10 @@ onMounted(async () => {
 const sendMessage = () => {
   const inputT = {
     username: username.value || 'Anonymous',
-    input: input.value.trim(),
+    input: input.value,
     timestamp: new Date().toLocaleTimeString()
   };
-  if(inputT) {
+  if(inputT.input) {
     socket.emit('chat message',inputT);
     console.log('input.value',input.value);
     console.log('inputT',inputT);
@@ -48,6 +44,14 @@ const sendMessage = () => {
 }
 
 onUnmounted(() => {
+  socket.on('disconnect', (username) => {
+      messages.value.push({
+        username: username,
+        message: ` disconnect the chat`,
+        timestamp:new Date().toLocaleTimeString()
+      });
+      console.log('Disconnected from server')
+    });
   socket.disconnect();
 })
 const isLogin = ref(false); 

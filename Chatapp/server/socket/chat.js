@@ -17,17 +17,22 @@ module.exports = (io) => {
     socket.on('chat message', (msg) => {
         const userData = users.get(socket.id);
         const data = {
-            username : userData.username,
+            username : username,
             message : msg,
             timestamp : new Date ().toLocaleTimeString(),
         }
+        console.log(msg)
         console.log('message: ' + msg);
         io.emit('chat message', data);
             console.log('user id:', socket.id);
     });
-    socket.on('disconnect', (socket) =>{
-        console.log('Total connected users:', io.sockets.sockets.size);
+    
+    socket.on('disconnect', async(socket) =>{
+        const User = users.get(socket.id)
+        console.log(User)
+            await console.log('user disconnect ',socket.id)
+            await console.log('total user ', io.sockets.sockets.size)
+            await users.delete(socket.id)
     });
-
 });
 }
