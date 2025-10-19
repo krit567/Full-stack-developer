@@ -70,3 +70,8 @@ The path to full stack developer
 
 # Day 16
 -- rest body
+
+# Day 17
+-- install Mongoose and install mongodb
+-- create dir config and db.js
+-- creating dir models and message.js

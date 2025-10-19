@@ -5,7 +5,9 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const morgen = require('morgan')
+const connectDB = require(`./config/db`)
 const cors = require('cors')
+const PORT = 5000
 const bodyparser = require('body-parser')
 const io = new Server(server, {
     cors: {
@@ -13,6 +15,7 @@ const io = new Server(server, {
     }
 })
 
+connectDB()
 require('./socket/chat')(io)
 
 app.use(cors())
@@ -48,6 +51,6 @@ readdirSync('./Routes')
 //   });
 // });
 
-server.listen(5000,() =>{
-    console.log('Server running on port 5000')
+server.listen(PORT, () =>{
+    console.log(`Server running on port ${PORT}`)
 })
