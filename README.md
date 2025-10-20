@@ -75,3 +75,6 @@ The path to full stack developer
 -- install Mongoose and install mongodb
 -- create dir config and db.js
 -- creating dir models and message.js
+
+# Day 18
+-- start learning database on mongodb 
