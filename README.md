@@ -78,3 +78,9 @@ The path to full stack developer
 
 # Day 18
 -- start learning database on mongodb 
+-- create model message
+
+# Day 19 
+-- create model user 
+-- install bcryptjs and jsonwebtoken
+-- edit chat.js

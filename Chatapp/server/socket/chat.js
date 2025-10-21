@@ -1,9 +1,10 @@
-const { timestamp } = require("@vueuse/core");
+const Message = require('./models/Message')
 
 module.exports = (io) => {
     const users = new Map();
     io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
+    console.log('Total connected users:', io.sockets.sockets.size);
 
     socket.on('checkuser',(username) => { 
         users.set(socket.id,{ // socket.io เป็น key ของ map
@@ -12,7 +13,6 @@ module.exports = (io) => {
         })
         socket.broadcast.emit('join', username)
     });
-    console.log('Total connected users:', io.sockets.sockets.size);
 
     socket.on('chat message', (msg) => {
         const userData = users.get(socket.id);
@@ -28,6 +28,7 @@ module.exports = (io) => {
     });
     
     socket.on('disconnect', async(socket) =>{
+        console.log('Total connected users:', io.sockets.sockets.size);
         const User = users.get(socket.id)
         console.log(User)
             await console.log('user disconnect ',socket.id)
