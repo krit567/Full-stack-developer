@@ -10,7 +10,7 @@ const cors = require('cors')
 const PORT = 5000
 const bodyparser = require('body-parser')
 const Message = require('./models/message')
-const newMessage = new Message({username, message,time})
+const newMessage = new Message({ username, message,nickname,time})
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173"

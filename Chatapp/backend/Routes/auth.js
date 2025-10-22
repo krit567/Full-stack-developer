@@ -11,19 +11,18 @@ router.get('/auth', (req,res) => {
 router.post('/register', async (req,res) => {
     const { username , password , nickname } = req.body
     try{
-    let user = await User.findOne({ username })
-    if(user) {
+    let users = await User.findOne({ username })
+    if(users) {
         res.status(400).json({ msg: 'Username already exists'})
     }
-
-    const user = new User({username , password , nicename});
+    const user = new User({username , password , nickname});
     const salt  = await bcrypt.genSalt(20); // สุ่มตัวอักษร 20 ตัว
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
     res.status(201).json({ msg : 'successful'})
     }catch(err){
-        console.error('error is ' err)
+        console.error('error is ' ,err)
         res.status(500).send('Server Error')
     }
 })

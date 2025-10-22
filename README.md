@@ -84,3 +84,12 @@ The path to full stack developer
 -- create model user 
 -- install bcryptjs and jsonwebtoken
 -- edit chat.js
+
+# Day 20
+-- rename dir server => backend
+-- edit model room.js and user.js and message.js #pls check
+-- edit pin.js and auth.js #pls check
+-- edit chat.js not complete 
+-- create User.js in Stores 
+-- create login and register
+-- add router on index.js
