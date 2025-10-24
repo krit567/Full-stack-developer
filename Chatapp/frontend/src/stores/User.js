@@ -5,7 +5,7 @@ const URL = "http://localhost:5000";
 export const useUserStore = defineStore('User',{
   state: () => ({
     Pin : ref(''),
-    UserData : {
+    userData : {
         username : ref(''),
         password : ref(''),
         nickname : ref('')
@@ -14,8 +14,8 @@ export const useUserStore = defineStore('User',{
   actions:{
     async createUser(){
       try {
-      const res = await axios.get(`${URL}/api/pin`)
-      this.Pin = res.data
+      const res = await axios.post(`${URL}/auth/register`)
+      this.userData = res.data
       }
       catch(e){
         console.log(e)

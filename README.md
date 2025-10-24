@@ -93,3 +93,11 @@ The path to full stack developer
 -- create User.js in Stores 
 -- create login and register
 -- add router on index.js
+
+# Day 21
+-- Sick
+
+# Day 22
+-- create dir controllers and messageContro.js #complete
+-- create authContro.js #pls check
+-- edit chat.js in dir socket #complete
