@@ -16,7 +16,8 @@ const io = new Server(server, {
 
 connectDB()
 require('./socket/chat')(io)
-
+app.use(express.json({limit: '10mb'}))
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 app.use(morgen('dev'))
 // app.get('/', (req,res) => {

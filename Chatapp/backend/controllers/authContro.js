@@ -16,9 +16,9 @@ exports.createdUser = async (req,res) => {
         })
     }
     // เช็คว่า user ซ้ำมั้ย
-    let users = await User.findOne({ username })
+    const users = await User.findOne({ username })
     if(users) {
-        res.status(400).json({ msg: 'Username already exists'})
+         return res.status(400).json({ msg: 'Username already exists'})
     }
 
     // ทำการเข้ารหัส

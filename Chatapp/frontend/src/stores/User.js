@@ -1,20 +1,22 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
+
 const URL = "http://localhost:5000";
+
 export const useUserStore = defineStore('User',{
   state: () => ({
-    Pin : ref(''),
-    userData : {
-        username : ref(''),
-        password : ref(''),
-        nickname : ref('')
-    }
+    Pin : '',
+    user : [],
   }),
   actions:{
-    async createUser(){
+    async createUser(username,password,nickname){
       try {
-      const res = await axios.post(`${URL}/auth/register`)
+      const  userData = {
+        username : '',
+        password : '',
+        nickname : ''
+    }
+      const res = await axios.post(`${URL}/auth/register`,userData)
       this.userData = res.data
       }
       catch(e){

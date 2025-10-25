@@ -101,3 +101,6 @@ The path to full stack developer
 -- create dir controllers and messageContro.js #complete
 -- create authContro.js #pls check
 -- edit chat.js in dir socket #complete
+
+# Day23
+-- edit error add express.json
