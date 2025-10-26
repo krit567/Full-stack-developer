@@ -104,3 +104,8 @@ The path to full stack developer
 
 # Day23
 -- edit error add express.json
+
+# Day 24
+-- edit User.js store 
+-- edit register.vue
+-- complete register

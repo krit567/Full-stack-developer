@@ -7,22 +7,27 @@ const bodyparser = require('body-parser')
 
 
 exports.createdUser = async (req,res) => {
+    console.log('=== Register Request ===');
+    console.log('req.body:', req.body);
     const {username , password , nickname } = req.body
     try{
     // เช็คว่าข้อมูลครบมั้ย
     if (!username || !password || !nickname){
+        console.log('ข้อมูลไม่ครบ:', { username, password, nickname });
         return res.status(400).json({
             message: 'กรุณากรอกข้อมูลให้ครบ'
         })
     }
     // เช็คว่า user ซ้ำมั้ย
     const users = await User.findOne({ username })
+    console.log('User exists check:', users);
     if(users) {
+         console.log('Username already exists:', username);
          return res.status(400).json({ msg: 'Username already exists'})
     }
 
     // ทำการเข้ารหัส
-    const salt  = await bcrypt.genSalt(20); // สุ่มตัวอักษร 20 ตัว
+    const salt  = await bcrypt.genSalt(12); // สุ่มตัวอักษร 12 ตัว
     const hashpassword = await bcrypt.hash(password, salt);
 
 
@@ -32,8 +37,10 @@ exports.createdUser = async (req,res) => {
         password : hashpassword ,
         nickname
         });
-        
+    
+    console.log('Saving user:', { username, nickname });    
     await user.save();
+    console.log('User saved successfully!');
     res.status(201).json({ msg : 'successful'})
     }catch(err){
         console.error('error is ' ,err)

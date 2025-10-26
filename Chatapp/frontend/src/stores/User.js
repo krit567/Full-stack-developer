@@ -3,24 +3,25 @@ import axios from 'axios'
 
 const URL = "http://localhost:5000";
 
-export const useUserStore = defineStore('User',{
+export const useUserStore = defineStore('User', {
   state: () => ({
-    Pin : '',
-    user : [],
+    Pin: '',
+    listuser: [],
   }),
-  actions:{
-    async createUser(username,password,nickname){
+  actions: {
+    async createdUser(userData) {
       try {
-      const  userData = {
-        username : '',
-        password : '',
-        nickname : ''
-    }
-      const res = await axios.post(`${URL}/auth/register`,userData)
-      this.userData = res.data
+        const res = await axios.post(`${URL}/api/register`, userData, {
+       headers: {
+          'Content-Type': 'application/json'
+         }
+        })
+        console.log('User created:', res)
+        return res.data
       }
-      catch(e){
-        console.log(e)
+      catch (e) {
+        console.log('error is ', e)
+        throw e
       }
     }
   }
