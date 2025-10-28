@@ -30,7 +30,6 @@ exports.createdUser = async (req,res) => {
     const salt  = await bcrypt.genSalt(12); // สุ่มตัวอักษร 12 ตัว
     const hashpassword = await bcrypt.hash(password, salt);
 
-
     // สร้าง user
     const user = new User({
         username , 

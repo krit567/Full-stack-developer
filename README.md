@@ -106,6 +106,13 @@ The path to full stack developer
 -- edit error add express.json
 
 # Day 24
--- edit User.js store 
+-- edit User.js as stores
 -- edit register.vue
 -- complete register
+
+# Day 25
+-- reset body
+
+# Day 26
+-- start create page login.vue
+-- add userLogin in User.js as stores

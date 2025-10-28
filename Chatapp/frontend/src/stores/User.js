@@ -23,6 +23,17 @@ export const useUserStore = defineStore('User', {
         console.log('error is ', e)
         throw e
       }
-    }
+    },
+    async userLogin(username,password){
+      try{
+        const res = await axios.post(`${URL}/api/login`, {
+          username:username,
+          password:password
+        })
+        
+      }catch(err){
+
+      }
+    },
   }
 })
