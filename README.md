@@ -116,3 +116,7 @@ The path to full stack developer
 # Day 26
 -- start create page login.vue
 -- add userLogin in User.js as stores
+
+# Day 27
+-- edit login
+-- learn vue state and getters
