@@ -53,7 +53,7 @@ exports.userLogin = async (req, res) => {
                 msg: 'กรุณากรอก username และ password'
             })
         }
-        const user = await User.findOneAndUpdate({ username }, {new: true});
+        const user = await User.findOne({ username });
         console.log(user)
         if (!user) {
             return res.status(500).json({ msg: 'ไม่พบ user' })
@@ -63,14 +63,21 @@ exports.userLogin = async (req, res) => {
             if (!isPassword) {
                 return res.status(400).json({ msg: 'The password is incorrect.' })
             }
-        }
-        res.status(200).json({
-            msg: 'Login successful',
-            data: {
-                username: user.username,
-                nickname: user.nickname
+            let payload = {
+                user : {
+                    userid : user._id,
+                    username : user.nickname,
+                }
             }
-        })
+
+            jwt.sign(payload, 'jwtsecret' , { expiresIn:10} , (err, token) => {
+                if(err) throw err;
+                res.json( {token , payload })
+            })
+        }else{
+            return res.status(400).send('User not found')
+        }
+        
     } catch (err) {
         console.error('error is ', err)
         res.status(500).json({ msg: 'Error Login' })

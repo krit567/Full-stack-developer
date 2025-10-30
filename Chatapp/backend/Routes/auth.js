@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { createdUser,userLogin } = require('../controllers/authContro.js')
+const { createdUser, userLogin } = require('../controllers/authContro.js')
+
+
+
 router.get('/auth', (req,res) => {
     res.send('Auth jaa')
 })

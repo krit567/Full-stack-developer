@@ -120,3 +120,6 @@ The path to full stack developer
 # Day 27
 -- edit login
 -- learn vue state and getters
+
+# Day 28 
+-- create dir middleware and edit authContro.js 
