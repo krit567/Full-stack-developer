@@ -1,14 +1,22 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 import { io } from 'socket.io-client';
+import { useUserStore } from '@/stores/User';
 import { timestamp } from '@vueuse/core';
+
 const username = ref('');
 const messages = ref([]);
+const router = useRouter();
 const input = ref('');
-let socket;
-
+const userStore = useUserStore();
+let socket = null; // ประกาศตัวแปร socket
+const logout = async () => {
+  userStore.userLogout()
+  router.push('/')
+}
 onMounted(async () => {
     socket = io('http://localhost:5000')
     socket.on('connect', () => {
@@ -65,7 +73,7 @@ const login = () => {
 
 <template>
   <div>
-
+    <button @click="logout()">logout</button>
     <div v-if="!isLogin">
       <h2>Enter your name to join the chat</h2>
       <input v-model="username" placeholder="Enter your name" />

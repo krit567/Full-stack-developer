@@ -123,3 +123,6 @@ The path to full stack developer
 
 # Day 28 
 -- create dir middleware and edit authContro.js 
+
+# Day29
+-- add login and logout 

@@ -70,7 +70,8 @@ exports.userLogin = async (req, res) => {
                 }
             }
 
-            jwt.sign(payload, 'jwtsecret' , { expiresIn:10} , (err, token) => {
+            const timeout = 30*60
+            jwt.sign(payload, 'jwtsecret' , { expiresIn:timeout} , (err, token) => {
                 if(err) throw err;
                 res.json( {token , payload })
             })
