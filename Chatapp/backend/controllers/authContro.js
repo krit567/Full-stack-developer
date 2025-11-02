@@ -73,7 +73,11 @@ exports.userLogin = async (req, res) => {
             const timeout = 30*60
             jwt.sign(payload, 'jwtsecret' , { expiresIn:timeout} , (err, token) => {
                 if(err) throw err;
-                res.json( {token , payload })
+                res.json( {
+                    token , 
+                    payload,
+                    success : true
+                })
             })
         }else{
             return res.status(400).send('User not found')

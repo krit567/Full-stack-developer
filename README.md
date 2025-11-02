@@ -126,3 +126,6 @@ The path to full stack developer
 
 # Day29
 -- add login and logout 
+
+# Day 30
+-- learn socket frontend by ai 

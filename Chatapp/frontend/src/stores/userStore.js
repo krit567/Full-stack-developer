@@ -42,34 +42,37 @@ export const useUserStore = defineStore('User', {
         throw e
       }
     },
+    
     async userLogin(username, password) {
       try {
         const res = await axios.post(`${URL}/api/login`, {
           username: username,
           password: password
         })
-        if (res.status == 200) {
+        console.log('Login response:', res)
+        if (res.data.success) {
           const { token: token, payload: { user } } = res.data // สร้างตัวแปร user และ token
+          console.log('token is ', token)
+          console.log('user is ', user)
           const data = this.envdata({
             token: token,
             id: user.userid,
             username: user.username
           })
           localStorage.setItem('data_auth', data)
-          console.log(token)
-          console.log(user)
-          console.log(data)
-          return { status: 200, success: true, message: 'Login successful' }
+          return res.data;
         } else {
-          return { status: res.status, success: false, message: 'Login failed' };
+          return { 
+            status: res.status, 
+            success: false, 
+            message: 'Login failed' };
         }
-
       } catch (err) {
         console.error('Error in userLogin:', err)
         return { 
           status: err.response?.status || 500, 
           success: false, 
-          message: err.response?.data?.message || 'An error occurred during login' 
+          message: err.response?.data?.message || err.message || 'An error occurred during login' 
         }
       }
     },

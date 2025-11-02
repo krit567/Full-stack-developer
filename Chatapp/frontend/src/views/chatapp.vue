@@ -4,7 +4,7 @@ import { onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 import { io } from 'socket.io-client';
-import { useUserStore } from '@/stores/User';
+import { useUserStore } from '@/stores/userStore';
 import { timestamp } from '@vueuse/core';
 
 const username = ref('');

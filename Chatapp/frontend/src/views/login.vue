@@ -1,7 +1,7 @@
 <script setup>
 import {ref } from 'vue'
 import { RouterLink } from 'vue-router' 
-import { useUserStore } from '@/stores/User'
+import { useUserStore } from '@/stores/userStore'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const userStore = useUserStore()
@@ -14,7 +14,7 @@ const checkuser = async () => {
         const res = await userStore.userLogin(username.value, password.value)
         
         // ตรวจสอบว่า res มีค่าและ login สำเร็จ
-        if (res && res.success && res.status === 200) {
+        if (res.data || res.success) {
             await console.log(res)
             console.log('Login successful, navigating to /chatapp')
             router.push('/chatapp')
@@ -33,7 +33,7 @@ const checkuser = async () => {
     <h1>Login</h1>
     <input type="text" v-model="username" placeholder="username">username
     <br>
-    <input :type = "checkbox.value ?'text' : 'password'" v-model="password" placeholder="password">password
+    <input :type = "checkbox ?'text' : 'password'" v-model="password" placeholder="password">password
     <input type="checkbox" v-model="checkbox" @change="console.log(password)">
     <br>
     <input type="submit" value="Login" @click="checkuser">
